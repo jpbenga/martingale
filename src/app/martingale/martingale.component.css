@@ -1,0 +1,180 @@
+/* Styles généraux */
+.martingale-simulation {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* En-tête et informations de simulation */
+.simulation-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.simulation-params, .global-stats {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.simulation-params {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .simulation-info {
+    flex-direction: column;
+  }
+
+  .simulation-params, .global-stats {
+    width: 100%;
+  }
+}
+
+.budget, .target, .success-rate {
+  font-weight: bold;
+}
+
+.increase { color: green; }
+.decrease { color: red; }
+.target { color: #007bff; }
+
+/* Groupe de boutons */
+.button-group {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #cccccc;
+}
+
+/* Message de résultat */
+.result-message {
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.success { background-color: #d4edda; color: #155724; }
+.failure { background-color: #f8d7da; color: #721c24; }
+
+/* Résultats de simulation */
+.simulation-results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.result-item {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 5px;
+}
+
+.iteration {
+  margin-right: 5px;
+  color: #666;
+}
+
+.result-number {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-weight: bold;
+  margin-right: 5px;
+  color: white;
+}
+
+.result-number.rouge { background-color: #DC3545; }
+.result-number.noir { background-color: #343A40; }
+.result-number.vert { background-color: #28A745; }
+
+.result-color {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.bet-choice, .bet-amount, .current-budget {
+  margin: 0 5px;
+}
+
+.bet-result {
+  margin-left: 5px;
+}
+
+.win { color: green; }
+.lose { color: red; }
+
+/* Styles supplémentaires pour améliorer la lisibilité */
+.bet-choice {
+  font-weight: bold;
+}
+
+.current-budget {
+  font-style: italic;
+}
+
+/* Styles pour la case à cocher */
+.show-all-iterations {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.show-all-iterations input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+/* Styles pour assurer la lisibilité sur les petits écrans */
+@media (max-width: 600px) {
+  .result-item {
+    flex-wrap: wrap;
+  }
+
+  .bet-amount, .current-budget {
+    width: 100%;
+    margin-top: 5px;
+  }
+}

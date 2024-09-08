@@ -1,0 +1,66 @@
+<div class="martingale-simulation">
+    <h2>Simulation Martingale</h2>
+  
+    <form (ngSubmit)="onSubmit()" class="simulation-params">
+      <div class="form-group">
+        <label for="initialBudget">Budget initial :</label>
+        <input type="number" id="initialBudget" [(ngModel)]="initialBudget" name="initialBudget" [disabled]="simulationInProgress">
+      </div>
+      <div class="form-group">
+        <label for="maxIterations">Nombre max d'itérations :</label>
+        <input type="number" id="maxIterations" [(ngModel)]="maxIterations" name="maxIterations" [disabled]="simulationInProgress">
+      </div>
+      <div class="form-group">
+        <label for="targetBudget">Objectif (budget cible) :</label>
+        <input type="number" id="targetBudget" [(ngModel)]="targetBudget" name="targetBudget" [disabled]="simulationInProgress">
+      </div>
+      <div class="form-group">
+        <label for="betTime">Temps pour placer un pari (secondes) :</label>
+        <input type="number" id="betTime" [(ngModel)]="betTime" name="betTime" [disabled]="simulationInProgress">
+      </div>
+      <div class="form-group">
+        <label for="spinTime">Temps pour un tirage de la roulette (secondes) :</label>
+        <input type="number" id="spinTime" [(ngModel)]="spinTime" name="spinTime" [disabled]="simulationInProgress">
+      </div>
+      <button type="submit" [disabled]="simulationInProgress">Démarrer</button>
+    </form>
+  
+    <div class="simulation-info">
+      <p>Budget actuel : <span [ngClass]="{'increase': budget > initialBudget, 'decrease': budget < initialBudget}">{{ budget | currency:'EUR':'symbol':'1.2-2' }}</span></p>
+      <p>Itérations : {{ currentIterations }} / {{ maxIterations }}</p>
+    </div>
+  
+    <div class="global-stats">
+      <h3>Statistiques globales</h3>
+      <p>Nombre total de simulations : {{ totalSimulations }}</p>
+      <p>Simulations réussies : {{ successfulSimulations }}</p>
+      <p>Taux de réussite global : <span class="success-rate">{{ globalSuccessRate | number:'1.2-2' }}%</span></p>
+    </div>
+  
+    <div class="button-group">
+      <button (click)="resetSimulation()" [disabled]="simulationInProgress">Réinitialiser la simulation</button>
+      <button (click)="resetGlobalStats()">Réinitialiser les statistiques globales</button>
+    </div>
+  
+    <label class="show-all-iterations">
+      <input type="checkbox" [(ngModel)]="showAllIterations"> Afficher toutes les itérations
+    </label>
+  
+    <p class="result-message" [ngClass]="{'success': budget >= targetBudget, 'failure': budget <= 0}">{{ resultMessage }}</p>
+    <p class="simulation-time">Temps total de la simulation : {{ formatTime(totalSimulationTime) }}</p>
+  
+    <div class="simulation-results">
+      <div class="result-item" *ngFor="let log of getDisplayedLogs()">
+        <span class="iteration">{{ log.iteration }}</span>
+        <span class="result-number" [ngClass]="log.color">{{ log.generatedNumber }}</span>
+        <span class="result-color" [ngStyle]="{'background-color': log.color}"></span>
+        <span class="result-parity">{{ log.parity }}</span>
+        <span class="bet-choice" *ngIf="log.betAmount > 0" [ngClass]="log.betChoice">{{ log.betChoice }}</span>
+        <span class="bet-amount" *ngIf="log.betAmount > 0">{{ log.betAmount | currency:'EUR':'symbol':'1.2-2' }}</span>
+        <span class="current-budget">{{ log.currentBudget | currency:'EUR':'symbol':'1.2-2' }}</span>
+        <span class="bet-result" [ngClass]="{'win': log.result === 'Gagné', 'lose': log.result === 'Perdu'}">
+          {{ log.result }}
+        </span>
+      </div>
+    </div>
+  </div>
